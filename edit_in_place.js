@@ -5,6 +5,13 @@
 *每个人都有保持代码优雅的责任
 */
 
+/*
+* 就地编辑组件
+* created by Theresa
+* 2016-8-23
+*每个人都有保持代码优雅的责任
+*/
+
 function EditInPlaceField(id,parent,value) {
   this.id = id;
   this.value = value||'default value';
@@ -54,6 +61,7 @@ EditInPlaceField.prototype ={
     this.fieldElement.style.display = "none";
     this.saveButton.style.display = "none";
     this.cancleButton.style.display = "none"
+    this.setValue(this.value);
   },
 
   attachEvents:function () {
@@ -64,12 +72,11 @@ EditInPlaceField.prototype ={
 
     // 绑定取消按钮的事件
     this.cancleButton.addEventListener('click',function () {
-      that.convertToText();
+      that.cancle();
     },false)
 
     this.saveButton.addEventListener('click',function () {
-      that.setValue(that.value);
-      that.convertToText();
+      that.save();
     },false)
   },
   convertToEditable:function () {
@@ -80,9 +87,25 @@ EditInPlaceField.prototype ={
     //设置input的value
     this.setValue(this.value);
   },
+  cancle:function(){
+    this.convertToText();
+  },
 
-  setValue:function (value) {
-    // this.fieldElement.value = value;
+  save:function(){
+    this.value = this.getValue();
+    this.convertToText();
+  },
+
+  getValue:function(){
+    return this.fieldElement.value;
+  },
+  setValue:function(value) {
+    this.fieldElement.value = value;
+    this.staticElement.innerHTML = value;
+  }
+
+};
+
 
     this.staticElement.innerHTML = this.fieldElement.value;
   }
