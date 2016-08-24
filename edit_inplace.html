@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div id="app">
+    <div id="zh_name_wrapper">
+      <span v-bind:style="{display:showText}" v-on:click= "clickme">{{content}}</span>
+      <input type="text" v-show="" v-bind:style="{display:hideText}" v-model="content">
+      <input type="button" value="保存" v-show="" v-bind:style="{display:hideText}" v-on:click= "save">
+      <input type="button" value="取消" v-show="" v-bind:style="{display:hideText}" v-on:click= "cancle"></div>
+    </div>
+  </div>
+  <script src="http://cdn.bootcss.com/vue/2.0.0-rc.1/vue.min.js"></script>
+  <script type="text/javascript">
+    let vm = new Vue({
+      el:'#app',
+      data:{
+        showText:"inline-block",
+        hideText:"none",
+        content:"无名氏",
+        oldValue:""
+      },
+      methods:{
+        clickme:function(){
+          this.showText = "none";
+          this.hideText = "inline-block";
+          this.oldValue = this.content;
+        },
+        save:function() {
+          this.showText = "inline-block";
+          this.hideText = "none";
+        },
+        cancle:function () {
+          this.showText = "inline-block";
+          this.hideText = "none";
+          this.content = this.oldValue;
+        }
+      }
+    })
+  </script>
+</body>
+<html>
